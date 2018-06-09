@@ -11,9 +11,9 @@ class StudentsController < ApplicationController
 
   def activate
     @student = Student.find(params[:id])
-    toggle_status = @student.activate
-    @student.update(active: toggle_status)
-    redirect_to action: show
+    @student.active = !@student.active #toggles status between true and false
+    @student.save
+    redirect_to student_path(@student)
   end
 
   private
